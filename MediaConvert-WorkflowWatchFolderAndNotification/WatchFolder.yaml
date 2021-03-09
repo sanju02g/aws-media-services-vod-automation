@@ -8,14 +8,14 @@ Parameters:
   NotifcationEmail:
     Description: Email address for SNS notifications
     Type: String
-    Default: elementalrodeo@gmail.com
+    Default: sanjay02g@gmail.com
     AllowedPattern: "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
 Mappings:
   SourceCode:
     General:
-      S3Bucket: "rodeolabz"
-      KeyPrefix: "vodtk0.0.2/1a-mediaconvert-watchfolder"
+      S3Bucket: "vod-watchfolder-testing"
+      KeyPrefix: "lambda function"
 
 Resources:
 
@@ -149,7 +149,7 @@ Resources:
       Role: !GetAtt LambdaRole.Arn
       Code:
         S3Bucket: !Join ["-", [!FindInMap ["SourceCode", "General", "S3Bucket"], !Ref "AWS::Region"]]
-        S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "lambda.zip"]]
+        S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "convert.py"]]
       Environment:
         Variables:
           DestinationBucket: !Ref MediaBucket
